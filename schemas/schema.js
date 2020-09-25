@@ -60,6 +60,12 @@ export default createSchema({
           name: 'coverImage',
           title: 'Imagem de Capa',
           type: 'image'
+        },
+        {
+          name: 'author',
+          title: 'Autor',
+          type: 'reference',
+          to: [{ type: 'author' }]
         }
       ]
     }
