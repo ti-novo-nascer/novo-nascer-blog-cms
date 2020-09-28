@@ -12,22 +12,26 @@ export default createSchema({
         {
           name: 'slug',
           title: 'Slug',
-          type: 'slug'
+          type: 'slug',
+          validation: Rule => Rule.required().error('O slug é obrigatório')
         },
         {
           name: 'profilePicture',
           title: 'Foto de Perfil',
-          type: 'image'
+          type: 'image',
+          validation: Rule => Rule.required().error('A foto de perfil é obrigatória')
         },
         {
-          name: 'fullName',
-          title: 'Nome Completo',
-          type: 'string'
+          name: 'name',
+          title: 'Nome',
+          type: 'string',
+          validation: Rule => Rule.required().error('O nome é obrigatório')
         },
         {
           name: 'bio',
           title: 'Bio',
-          type: 'string'
+          type: 'string',
+          validation: Rule => Rule.required().error('A bio é obrigatória')
         }
       ]
     },
@@ -39,33 +43,49 @@ export default createSchema({
         {
           name: 'slug',
           title: 'Slug',
-          type: 'slug'
+          type: 'slug',
+          validation: Rule => Rule.required().error('O slug é obrigatório')
         },
         {
           name: 'title',
           title: 'Título',
-          type: 'string'
+          type: 'string',
+          validation: Rule => [
+            Rule.required().error('O título é obrigatório'),
+            Rule.max(60).warning('O título ideal deve conter no máximo 60 caracteres')
+          ]
         },
         {
-          name: 'subtitle',
-          title: 'Subtítulo',
-          type: 'string'
+          name: 'description',
+          title: 'Descrição',
+          type: 'string',
+          validation: Rule => [
+            Rule.required().error('A descrição é obrigatória'),
+            Rule.min(50).warning('A descrição ideal deve conter no mínimo 50 caracteres'),
+            Rule.max(160).warning('A descrição ideal deve conter no máximo 160 caracteres')
+          ]
         },
         {
           name: 'date',
           title: 'Data',
-          type: 'date'
+          type: 'date',
+          validation: Rule => [
+            Rule.required().error('A data é obrigatória'),
+            Rule.min('2013-12-08').error('A data mais antiga permitida é 8 de dezembro de 2013')
+          ]
         },
         {
           name: 'coverImage',
           title: 'Imagem de Capa',
-          type: 'image'
+          type: 'image',
+          validation: Rule => Rule.required().error('A imagem de capa é obrigatória')
         },
         {
           name: 'author',
           title: 'Autor',
           type: 'reference',
-          to: [{ type: 'author' }]
+          to: [{ type: 'author' }],
+          validation: Rule => Rule.required().error('O autor é obrigatório')
         }
       ]
     }
