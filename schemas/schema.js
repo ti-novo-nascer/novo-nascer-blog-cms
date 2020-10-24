@@ -78,14 +78,52 @@ export default createSchema({
           name: 'coverImage',
           title: 'Imagem de Capa',
           type: 'image',
+          fields: [
+            {
+              name: 'description',
+              title: 'Descrição',
+              type: 'string',
+              validation: Rule => Rule.required().error('A descrição da imagem de capa é obrigatória')
+            }
+          ],
           validation: Rule => Rule.required().error('A imagem de capa é obrigatória')
+        },
+        {
+          name: 'content',
+          title: 'Conteúdo', 
+          type: 'array', 
+          of: [
+            {
+              type: 'block'
+            },
+            {
+              title: 'Imagem',
+              type: 'image',
+              fields: [
+                {
+                  name: 'description',
+                  title: 'Descrição da Imagem',
+                  type: 'string',
+                  options: { isHighlighted: true },
+                  validation: Rule => Rule.required().error('A descrição da imagem é obrigatória')
+                },
+                {
+                  name: 'caption',
+                  title: 'Legenda da Imagem',
+                  type: 'string',
+                  options: { isHighlighted: true }
+                }
+              ],
+              validation: Rule => Rule.required().error('A imagem é obrigatória')
+            }
+          ],
+          validation: Rule => Rule.required().error('O conteúdo é obrigatório')
         },
         {
           name: 'author',
           title: 'Autor',
           type: 'reference',
-          to: [{ type: 'author' }],
-          validation: Rule => Rule.required().error('O autor é obrigatório')
+          to: [{ type: 'author' }]
         }
       ]
     }
